@@ -1,0 +1,48 @@
+{
+    "app": {
+        "title": "Bienvenid@s a mi Web Portfolio"
+    },
+    "landing": {
+        "title": "Bienvenido a mi Portfolio"
+    },
+    "loader" : {
+        "text": "cargando..."
+    },
+    "dashboard" : {
+        "error": "Error en la búsqueda"
+    },
+    "login": {
+        "err_usr_pass": "Usuario o contraseña no pueden estar vacíos",
+        "err_inv_lgn": "Inicio inválido",
+        "email_placeholder": "correo",
+        "password_placeholder": "contraseña",
+        "button_login": "Entrar",
+        "login_title": "Panel de Acceso"
+    },
+    "admin": {
+        "err_invalid_form": "Elementos no pueden estar vacíos",
+        "err_network": "Error publicando el Proyecto",
+        "suc_network": "Proyecto publicado",
+        "header": "Project Input",
+        "input_title": "Título",
+        "input_description": "Descripción",
+        "input_link": "Enlace",
+        "input_tags": "Tags",
+        "input_version": "Versión",
+        "button_accept": "Publicar",
+        "button_delete": "Eliminar"
+    },
+    "nav": {
+        "home": "Inicio",
+        "dashboard": "Dashboard",
+        "admin": "Admin"
+    },
+    "aboutMeCard": {
+        "name": "Nombre",
+        "birthdate": "Nacimiento",
+        "nationality": "Nacionalidad",
+        "occupation": "Ocupación",
+        "company": "Empresa",
+        "github": "Link"
+    }
+}

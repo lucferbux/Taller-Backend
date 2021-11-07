@@ -1,0 +1,320 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Personal Portfolio",
+    "description": "Api to personal dashboard",
+    "contact": {
+      "email": "lucasfernandezaragon@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/lucferbux/ThreePoints/1.0.0",
+      "description": "ThreePoints Portfolio API"
+    }
+  ],
+  "tags": [
+    {
+      "name": "admins",
+      "description": "Secured Admin-only calls"
+    },
+    {
+      "name": "developers",
+      "description": "Operations available to regular developers"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "login to the service",
+        "description": "Login with username and password",
+        "operationId": "loginService",
+        "requestBody": {
+          "description": "AboutMe to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response with token"
+          },
+          "400": {
+            "description": "invalid credentials"
+          }
+        }
+      }
+    },
+    "/v1/aboutme": {
+      "get": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "get aboutme",
+        "description": "Get the personal of the portfolio owner\n",
+        "operationId": "aboutmeInfo",
+        "parameters": [
+          {
+            "name": "metadata",
+            "in": "query",
+            "description": "True to addd more metadata",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AboutMe"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "adds an inventory item",
+        "description": "Add or update the profile info",
+        "operationId": "addAboutMe",
+        "requestBody": {
+          "description": "AboutMe to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AboutMe"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "item created or updated"
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          }
+        }
+      }
+    },
+    "/v1//projects": {
+      "get": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "get projects",
+        "description": "Get all the projects\n",
+        "operationId": "projectsInfo",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of projects, default all",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "add new project",
+        "description": "Add a new project",
+        "operationId": "addProject",
+        "requestBody": {
+          "description": "Project to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Project"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "item created or updated"
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "delete project by id",
+        "description": "Delete the project",
+        "operationId": "deleteProject",
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "id not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AboutMe": {
+        "required": [
+          "birthday",
+          "github",
+          "id",
+          "job",
+          "name",
+          "nationality"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          },
+          "name": {
+            "type": "string",
+            "example": "Lucas Fernandez"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date-time",
+            "example": "1994-04-08T09:12:33.001Z"
+          },
+          "nationality": {
+            "type": "string",
+            "example": "Española"
+          },
+          "job": {
+            "type": "string",
+            "example": "Red Hat"
+          },
+          "github": {
+            "type": "string",
+            "example": "https://github.com/lucferbux"
+          }
+        }
+      },
+      "Project": {
+        "required": [
+          "description",
+          "id",
+          "link",
+          "tag",
+          "timestamp",
+          "title",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          },
+          "title": {
+            "type": "string",
+            "example": "Airdrop Crazy"
+          },
+          "description": {
+            "type": "string",
+            "example": "Fork of Hexway’s research on information leaked by BLE and Airdrop on our Apple Devices"
+          },
+          "version": {
+            "type": "string",
+            "example": "0.2.2"
+          },
+          "link": {
+            "type": "string",
+            "format": "url",
+            "example": "https://github.com/airdrop-crazy"
+          },
+          "tag": {
+            "type": "string",
+            "example": "Python, Flask, BLE"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-05-12T09:12:33.001Z"
+          }
+        }
+      },
+      "User": {
+        "required": [
+          "mail"
+        ],
+        "type": "object",
+        "properties": {
+          "mail": {
+            "type": "string",
+            "format": "mail",
+            "example": "lucasfernandezaragon@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "example": "fasf89a0s9.df980"
+          }
+        }
+      }
+    }
+  }
+}

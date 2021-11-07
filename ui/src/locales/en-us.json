@@ -1,0 +1,48 @@
+{
+    "app": {
+        "title": "Welcome to my Portfolio Webpage"
+    },
+    "landing": {
+        "title": "Welcome to my Portfolio"
+    },
+    "loader" : {
+        "text": "loading..."
+    },
+    "dashboard" : {
+        "error": "Error loading data"
+    },
+    "login": {
+        "err_usr_pass": "Username and password must not be null",
+        "err_inv_lgn": "Invalid login",
+        "email_placeholder": "email",
+        "password_placeholder": "password",
+        "button_login": "Log in",
+        "login_title": "Login Panel"
+    },
+    "admin": {
+        "err_invalid_form": "Inputs must not be null",
+        "err_network": "Error posting project",
+        "suc_network": "Project posted",
+        "header": "Project Input",
+        "input_title": "Title",
+        "input_description": "Description",
+        "input_link": "Link",
+        "input_tags": "Tags",
+        "input_version": "Version",
+        "button_accept": "Post",
+        "button_delete": "Delete"
+    },
+    "nav": {
+        "home": "Home",
+        "dashboard": "Dashboard",
+        "admin": "Admin"
+    },
+    "aboutMeCard": {
+        "name": "Name",
+        "birthdate": "Birthdate",
+        "nationality": "Nationality",
+        "occupation": "Occupation",
+        "company": "Company",
+        "github": "Link"
+    }
+}
