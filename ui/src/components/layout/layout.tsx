@@ -11,28 +11,6 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-/**
-{
-  name: 'description',
-  content:
-},
-{
-  name: 'apple-mobile-web-app-status-bar-style',
-  content: 'default'
-},
-{
-  name: "theme-color",
-  content: themes.light.primary,
-  media: "(prefers-color-scheme: light)",
-},
-{
-  name: "theme-color",
-  content: themes.dark.primary,
-  media: "(prefers-color-scheme: dark)",
-},
-
-**/
-
 const Layout = (props: LayoutProps) => {
   const { t } = useTranslation();
 
