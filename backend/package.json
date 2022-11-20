@@ -12,10 +12,9 @@
   ],
   "scripts": {
     "start": "node build/index.js",
+    "start:dev": "nodemon",
     "dev": "nodemon",
-    "build": "tsc",
-    "postinstall": "npm run build",
-    "lint": "tslint -p tsconfig.json --fix"
+    "build": "tsc"
   },
   "files": [
     "src"
