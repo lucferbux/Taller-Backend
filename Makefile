@@ -1,7 +1,7 @@
 # Execute the backend
 .PHONY: dev-api
 dev-api:
-	cd backend && npm run start:dev
+	cd api && npm run dev
 
 # Execute de frontend
 .PHONY: dev-ui

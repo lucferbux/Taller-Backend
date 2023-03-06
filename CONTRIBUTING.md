@@ -28,7 +28,7 @@ SECRET=e89f987sdfs9d879f8798dsf78978
 * `SECRET` configura el secreto del JWT (para verificación, actualmente no tiene uso)
 
 ```.env
-********* backend/.env *********
+********* api/.env *********
 #can be 'development' or 'production'
 NODE_ENV=development
 
@@ -47,7 +47,7 @@ SECRET=e89f987sdfs9d879f8798dsf78978
 Instalar las dependencias de ambos proyectos, puedes seguir este script
 
 ```bash
-cd backend
+cd api
 npm install
 cd ../ui
 npm install

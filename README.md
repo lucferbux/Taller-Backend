@@ -4,7 +4,7 @@
 
 ## Documentación
 
-Puedes encontrar la documentación de este proyecto en [este enlace](https://taller-threepoints-docs.netlify.app/docs/backend/intro).
+Puedes encontrar la documentación de este proyecto en [este enlace](https://taller-threepoints-docs.netlify.app/docs/api/intro).
 
 ## Prototipo
 
