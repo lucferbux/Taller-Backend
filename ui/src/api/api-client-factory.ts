@@ -2,9 +2,8 @@ import { API_BASE_URI } from "../utils/config";
 import HttpApiClient from "./http-api-client";
 import ApiClient from "./api-client";
 
-
 export default function createApiClient(): ApiClient {
-  if (process.env.NODE_ENV === "production") {
+  if (import.meta.env.PROD) {
     if (API_BASE_URI !== undefined) {
       return new HttpApiClient(API_BASE_URI);
     } else {

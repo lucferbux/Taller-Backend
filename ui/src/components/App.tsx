@@ -2,37 +2,36 @@ import React from "react";
 import Layout from "./layout/layout";
 import {
   BrowserRouter as Router,
-  Switch,
+  Navigate,
   Route,
-  Redirect
+  Routes,
 } from "react-router-dom";
 import LandingPage from "./routes/LandingPage";
 import Login from "./routes/Login";
-import PrivateRoute from "./routes/PrivateRoute";
 import Loader from "./elements/Loader";
 import Dashboard from "./routes/Dashboard";
 import Admin from "./routes/Admin";
+import PrivateRoute from "./routes/PrivateRoute";
 
 const App = () => {
   return (
     <Router>
       <Layout>
-        <Switch>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-          <PrivateRoute path="/admin">
-            <Admin />
-          </PrivateRoute>
-          <Redirect from="*" to="/" />
-        </Switch>
-        <Loader/>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="admin"
+            element={
+              <PrivateRoute>
+                <Admin />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="." replace />} />
+        </Routes>
+        <Loader />
       </Layout>
     </Router>
   );

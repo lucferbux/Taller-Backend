@@ -12,7 +12,7 @@ interface AboutMeCardRowProps {
 const AboutMeCardRow = (props: AboutMeCardRowProps) => {
   const formatDate = (value: string | number): string => {
     if (typeof value === "number") {
-      let date = new Date(value);
+      const date = new Date(value);
       return date.toLocaleDateString();
     } else {
       return value;
@@ -23,9 +23,9 @@ const AboutMeCardRow = (props: AboutMeCardRowProps) => {
     <InfoDetailBox>
       <InfoKey>{props.title}</InfoKey>
       <InfoValueWrapper>
-        { props.isLink ? (
+        {props.isLink ? (
           <LinkText href={props.value as string} target="_blank" rel="noopener">
-           {formatDate(props.value)}
+            {formatDate(props.value)}
           </LinkText>
         ) : (
           <InfoValue>{formatDate(props.value)}</InfoValue>
@@ -77,7 +77,6 @@ const LinkText = styled.a`
   @media (prefers-color-scheme: dark) {
     color: ${themes.dark.primary};
   }
-
 `;
 
 export default AboutMeCardRow;

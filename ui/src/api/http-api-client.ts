@@ -81,8 +81,8 @@ export default class HttpApiClient implements ApiClient {
   async token(email: string, password: string): Promise<TokenResponse> {
     const body = new URLSearchParams({
       email: email,
-      password: password
-    })
+      password: password,
+    });
     const response = await fetch(this.baseUrl + "/auth/login", {
       method: "POST",
       body: body,
@@ -93,18 +93,14 @@ export default class HttpApiClient implements ApiClient {
     return response.json();
   }
 
-
   getAboutMe = (): Promise<AboutMe> =>
     handleResponse(async () => {
-      const response = await fetch(
-        this.baseUrl + `/v1/aboutme/`,
-        {
-          method: "GET",
-          headers: {
-            //Authorization: getAuthorizationHeader()
-          }
-        }
-      );
+      const response = await fetch(this.baseUrl + `/v1/aboutme/`, {
+        method: "GET",
+        headers: {
+          //Authorization: getAuthorizationHeader()
+        },
+      });
       if (!response.ok) {
         throw await createApiError(response);
       }
@@ -113,22 +109,19 @@ export default class HttpApiClient implements ApiClient {
 
   getProjects = (): Promise<Project[]> =>
     handleResponse(async () => {
-      const response = await fetch(
-        this.baseUrl + `/v1/projects/`,
-        {
-          method: "GET",
-          headers: {
-            //Authorization: getAuthorizationHeader()
-          }
-        }
-      );
+      const response = await fetch(this.baseUrl + `/v1/projects/`, {
+        method: "GET",
+        headers: {
+          //Authorization: getAuthorizationHeader()
+        },
+      });
       if (!response.ok) {
         throw await createApiError(response);
       }
       return response.json();
     });
 
-    /** TODO: Create post for Proyect creation with authentication
+  /** TODO: Create post for Proyect creation with authentication
      * Hint: Headers of the post should be
      * headers: {
           Authorization: getAuthorizationHeader(),
@@ -137,5 +130,4 @@ export default class HttpApiClient implements ApiClient {
         }
      * 
      */
-  
 }

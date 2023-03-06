@@ -29,7 +29,7 @@ const Dashboard = () => {
         const projects: Project[] = await api.getProjects();
         const aboutme: AboutMe = await api.getAboutMe();
         setResponse({ aboutme, projects });
-      } catch(Error) {
+      } catch (Error) {
         setError("Info not found");
       } finally {
         stopSearch();
@@ -41,7 +41,7 @@ const Dashboard = () => {
       setError(undefined);
       addNotification(msg);
     }
-  
+
     function stopSearch() {
       removeLastNotification();
     }
@@ -124,7 +124,7 @@ const ProjectWrapper = styled.div`
     grid-template-columns: auto auto;
   }
 
-  @media (max-width: 1080px) {  
+  @media (max-width: 1080px) {
     grid-template-columns: auto auto auto;
     gap: 20px;
   }

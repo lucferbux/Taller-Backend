@@ -34,7 +34,9 @@ const Admin = () => {
       addNotification("Posting...");
       resetForm();
       setSuccessMsg(t("admin.suc_network"));
-      setTimeout(() => {setSuccessMsg("")}, 2000);
+      setTimeout(() => {
+        setSuccessMsg("");
+      }, 2000);
     } catch (e) {
       setErrorMsg(t("admin.err_network"));
     } finally {

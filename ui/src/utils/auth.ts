@@ -19,9 +19,7 @@ class WrongCredentialsException extends Error {}
 
 let logoutIfExpiredHandlerId: NodeJS.Timeout;
 
-export function setLogoutIfExpiredHandler(
-    setUser: (user: any) => void
-) {
+export function setLogoutIfExpiredHandler(setUser: (user: any) => void) {
   if (!isTokenActive()) {
     return;
   }
@@ -37,7 +35,6 @@ export function setLogoutIfExpiredHandler(
 }
 
 export function setAuthToken(accessToken: string) {
-   
   const tokenPayload = getPayload(accessToken);
   const token: Token = {
     accessToken: accessToken,
@@ -89,7 +86,7 @@ export function getCurrentUser(): User | undefined {
     return {
       id: tokenPayload.id,
       active: true,
-      email: tokenPayload.email
+      email: tokenPayload.email,
     };
   } else {
     return undefined;

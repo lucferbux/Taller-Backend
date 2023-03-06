@@ -6,7 +6,7 @@ dev-api:
 # Execute de frontend
 .PHONY: dev-ui
 dev-ui:
-	cd ui && npm run start:dev
+	cd ui && npm run dev
 
 .PHONY: install-ui
 install-ui:
