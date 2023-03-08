@@ -11,6 +11,7 @@
     "lint:fix": "eslint src --fix"
   },
   "dependencies": {
+    "@types/node": "^18.14.6",
     "i18next": "^19.9.2",
     "i18next-browser-languagedetector": "^6.0.1",
     "jwt-decode": "^3.1.2",
