@@ -1,4 +1,4 @@
-import { IAboutMeModel } from "./model";
+import { IAboutMeModel } from './model';
 
 /**
  * @export

@@ -1,6 +1,6 @@
-import IUserModel from "./model";
-import { IUserService } from "./interface";
-import { MockLogin } from "../Auth/mock";
+import IUserModel from './model';
+import { IUserService } from './interface';
+import { MockLogin } from '../Auth/mock';
 
 /**
  * @export
@@ -59,7 +59,7 @@ const UserService: IUserService = {
     } catch (error) {
       throw new Error(error.message);
     }
-  },
+  }
 };
 
 export default UserService;

@@ -1,22 +1,16 @@
-import {
-  createContext,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
-import createApiClient from "../api/api-client-factory";
-import { User } from "../model/user";
+import { createContext, ReactNode, useCallback, useEffect, useState } from 'react';
+import createApiClient from '../api/api-client-factory';
+import { User } from '../model/user';
 import {
   getCurrentUser,
   isTokenActive,
   setLogoutIfExpiredHandler,
   logout as logoutService,
-  setAuthToken,
-} from "../utils/auth";
+  setAuthToken
+} from '../utils/auth';
 
 const AuthContext = createContext<any>({
-  user: undefined,
+  user: undefined
 });
 
 interface Props {

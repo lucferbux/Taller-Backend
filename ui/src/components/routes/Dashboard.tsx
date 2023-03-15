@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styled from "styled-components";
-import useApp from "../../hooks/useApp";
-import { AboutMe } from "../../model/aboutme";
-import { Project } from "../../model/project";
-import AboutMeCard from "../cards/AboutMeCard";
-import ProjectCard from "../cards/ProjectCard";
-import { themes } from "../../styles/ColorStyles";
-import { MediumText } from "../../styles/TextStyles";
-import createApiClient from "../../api/api-client-factory";
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
+import useApp from '../../hooks/useApp';
+import { AboutMe } from '../../model/aboutme';
+import { Project } from '../../model/project';
+import AboutMeCard from '../cards/AboutMeCard';
+import ProjectCard from '../cards/ProjectCard';
+import { themes } from '../../styles/ColorStyles';
+import { MediumText } from '../../styles/TextStyles';
+import createApiClient from '../../api/api-client-factory';
 
 interface Response {
   aboutme?: AboutMe;
@@ -25,12 +25,12 @@ const Dashboard = () => {
     async function retrieveInfo() {
       const api = createApiClient();
       try {
-        startSearch(t("loader.text"));
+        startSearch(t('loader.text'));
         const projects: Project[] = await api.getProjects();
         const aboutme: AboutMe = await api.getAboutMe();
         setResponse({ aboutme, projects });
       } catch (Error) {
-        setError("Info not found");
+        setError('Info not found');
       } finally {
         stopSearch();
       }
@@ -65,7 +65,7 @@ const Dashboard = () => {
           </ResponseWrapper>
         )}
 
-        {error && <ErrorMsg>{t("dashboard.error")}</ErrorMsg>}
+        {error && <ErrorMsg>{t('dashboard.error')}</ErrorMsg>}
       </ContentWrapper>
     </Wrapper>
   );

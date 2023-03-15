@@ -1,6 +1,6 @@
-import { IAboutMeModel } from "./model";
-import { IAboutMeService } from "./interface";
-import { MockAboutMe } from "./mock";
+import { IAboutMeModel } from './model';
+import { IAboutMeService } from './interface';
+import { MockAboutMe } from './mock';
 
 /**
  * @export
@@ -17,7 +17,7 @@ const AboutMeService: IAboutMeService = {
       if (result.length > 0) {
         return result[0];
       } else {
-        throw new Error("empty search");
+        throw new Error('empty search');
       }
     } catch (error) {
       throw new Error(error.message);
@@ -37,7 +37,7 @@ const AboutMeService: IAboutMeService = {
         if (result.length > 0) {
           return result[0];
         } else {
-          throw new Error("empty search");
+          throw new Error('empty search');
         }
       } catch (error) {
         throw new Error(error.message);
@@ -65,7 +65,7 @@ const AboutMeService: IAboutMeService = {
   async remove(id: string): Promise<IAboutMeModel> {
     console.log(id);
     return undefined;
-  },
+  }
 };
 
 export default AboutMeService;

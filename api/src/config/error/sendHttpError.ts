@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { HttpError } from "./index";
-import { NextFunction, Request } from "express";
+import { HttpError } from './index';
+import { NextFunction, Request } from 'express';
 
 /**
  * @exports
@@ -26,11 +26,7 @@ import { NextFunction, Request } from "express";
  *          description: Error description
  *          example: User created
  */
-export function sendHttpErrorModule(
-  req: Request,
-  res: any,
-  next: NextFunction
-): void {
+export function sendHttpErrorModule(req: Request, res: any, next: NextFunction): void {
   res.sendHttpError = (error: HttpError): void => {
     res.status(error.status);
 
@@ -41,14 +37,14 @@ export function sendHttpErrorModule(
      */
     if (
       req.xhr ||
-      req.is("json") ||
-      (req.is("json") && req.get("Accept")) ||
-      !(req.get("Accept") && req.get("Accept").indexOf("html") !== -1)
+      req.is('json') ||
+      (req.is('json') && req.get('Accept')) ||
+      !(req.get('Accept') && req.get('Accept').indexOf('html') !== -1)
     ) {
       res.json({
         status: error.status,
         name: error.name,
-        message: error.message,
+        message: error.message
       });
     } else {
       res.send(generateHTML(error));
@@ -71,9 +67,9 @@ const generateHTML: Function = (error: HttpError): string => {
       `<p>Status: ${error.status}</p>` +
       `<p>Name: ${error.name}</p>` +
       `<p>${error}</p>` +
-      "</div>"
+      '</div>'
     );
   }
 
-  return "";
+  return '';
 };

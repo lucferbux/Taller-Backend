@@ -1,4 +1,4 @@
-import { IProjectsModel } from "./model";
+import { IProjectsModel } from './model';
 
 /**
  * @export

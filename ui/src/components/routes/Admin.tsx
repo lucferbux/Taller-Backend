@@ -1,27 +1,27 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styled from "styled-components";
-import useApp from "../../hooks/useApp";
-import { themes } from "../../styles/ColorStyles";
-import { Caption, H1 } from "../../styles/TextStyles";
+import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
+import useApp from '../../hooks/useApp';
+import { themes } from '../../styles/ColorStyles';
+import { Caption, H1 } from '../../styles/TextStyles';
 
 const Admin = () => {
   const { t } = useTranslation();
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [link, setLink] = useState("");
-  const [tags, setTags] = useState("");
-  const [version, setVersion] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-  const [sucessMsg, setSuccessMsg] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [link, setLink] = useState('');
+  const [tags, setTags] = useState('');
+  const [version, setVersion] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [sucessMsg, setSuccessMsg] = useState('');
   const { addNotification, removeLastNotification } = useApp();
 
   async function postProject(event: FormEvent<HTMLFormElement>) {
     dismissError();
     event.preventDefault();
     if (!readyToSubmit()) {
-      setErrorMsg(t("admin.err_invalid_form"));
+      setErrorMsg(t('admin.err_invalid_form'));
       return;
     }
     try {
@@ -31,14 +31,14 @@ const Admin = () => {
       console.log(version);
       console.log(link);
       // TODO: Create Proyect Object and post (HINT, there a generateUUID helper method)
-      addNotification("Posting...");
+      addNotification('Posting...');
       resetForm();
-      setSuccessMsg(t("admin.suc_network"));
+      setSuccessMsg(t('admin.suc_network'));
       setTimeout(() => {
-        setSuccessMsg("");
+        setSuccessMsg('');
       }, 2000);
     } catch (e) {
-      setErrorMsg(t("admin.err_network"));
+      setErrorMsg(t('admin.err_network'));
     } finally {
       removeLastNotification();
     }
@@ -52,17 +52,17 @@ const Admin = () => {
   // }
 
   function resetForm() {
-    setErrorMsg("");
-    setSuccessMsg("");
-    setTitle("");
-    setLink("");
-    setDescription("");
-    setTags("");
-    setVersion("");
+    setErrorMsg('');
+    setSuccessMsg('');
+    setTitle('');
+    setLink('');
+    setDescription('');
+    setTags('');
+    setVersion('');
   }
 
   function onChangeAnyInput() {
-    setErrorMsg("");
+    setErrorMsg('');
   }
 
   function onChangeTitle(e: ChangeEvent<HTMLInputElement>) {
@@ -91,52 +91,52 @@ const Admin = () => {
   }
 
   function readyToSubmit(): boolean {
-    return title !== "" && description !== "" && tags !== "" && version !== "";
+    return title !== '' && description !== '' && tags !== '' && version !== '';
   }
 
   function dismissError() {
-    setErrorMsg("");
+    setErrorMsg('');
   }
 
   return (
     <Wrapper>
       <ContentWrapper>
-        <TitleForm>{t("admin.header")}</TitleForm>
+        <TitleForm>{t('admin.header')}</TitleForm>
         <LoginPannel onSubmit={postProject} onReset={resetForm}>
           {errorMsg && <ErrorDescription>{errorMsg}</ErrorDescription>}
           {sucessMsg && <SuccessDescription>{sucessMsg}</SuccessDescription>}
           <LoginForm
             name="title"
             type="text"
-            placeholder={t("admin.input_title")}
+            placeholder={t('admin.input_title')}
             value={title}
             onChange={onChangeTitle}
           />
           <LoginForm
             name="description"
             type="text"
-            placeholder={t("admin.input_description")}
+            placeholder={t('admin.input_description')}
             value={description}
             onChange={onChangeDescription}
           />
           <LoginForm
             name="link"
             type="text"
-            placeholder={t("admin.input_link")}
+            placeholder={t('admin.input_link')}
             value={link}
             onChange={onChangeLink}
           />
           <LoginForm
             name="tags"
             type="text"
-            placeholder={t("admin.input_tags")}
+            placeholder={t('admin.input_tags')}
             value={tags}
             onChange={onChangeTags}
           />
           <LoginForm
             name="version"
             type="text"
-            placeholder={t("admin.input_version")}
+            placeholder={t('admin.input_version')}
             value={version}
             onChange={onChangeVersion}
           />
@@ -144,17 +144,13 @@ const Admin = () => {
             <ButtonCancel
               type="reset"
               value={
-                t("admin.button_delete") != null
-                  ? (t("admin.button_delete") as string)
-                  : "Delete"
+                t('admin.button_delete') != null ? (t('admin.button_delete') as string) : 'Delete'
               }
             />
             <ButtonForm
               type="submit"
               value={
-                t("admin.button_accept") != null
-                  ? (t("admin.button_accept") as string)
-                  : "Publish"
+                t('admin.button_accept') != null ? (t('admin.button_accept') as string) : 'Publish'
               }
             />
           </ButtonWrapper>

@@ -1,7 +1,7 @@
-import ProjectsService from "./service";
-import { HttpError } from "@/config/error";
-import { IProjectsModel } from "./model";
-import { NextFunction, Request, Response } from "express";
+import ProjectsService from './service';
+import { HttpError } from '@/config/error';
+import { IProjectsModel } from './model';
+import { NextFunction, Request, Response } from 'express';
 
 /**
  * @export
@@ -10,11 +10,7 @@ import { NextFunction, Request, Response } from "express";
  * @param {NextFunction} next
  * @returns {Promise < void >}
  */
-export async function findAll(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
+export async function findAll(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const aboutMeArray: IProjectsModel[] = await ProjectsService.findAll();
 
@@ -31,15 +27,9 @@ export async function findAll(
  * @param {NextFunction} next
  * @returns {Promise < void >}
  */
-export async function findOne(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
+export async function findOne(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const aboutMe: IProjectsModel = await ProjectsService.findOne(
-      req.params.id
-    );
+    const aboutMe: IProjectsModel = await ProjectsService.findOne(req.params.id);
 
     res.status(200).json(aboutMe);
   } catch (error) {
@@ -54,11 +44,7 @@ export async function findOne(
  * @param {NextFunction} next
  * @returns {Promise < void >}
  */
-export async function create(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
+export async function create(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const aboutMe: IProjectsModel = await ProjectsService.insert(req.body);
 
@@ -75,11 +61,7 @@ export async function create(
  * @param {NextFunction} next
  * @returns {Promise < void >}
  */
-export async function remove(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
+export async function remove(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const aboutMe: IProjectsModel = await ProjectsService.remove(req.params.id);
 

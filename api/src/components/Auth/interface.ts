@@ -1,4 +1,4 @@
-import { IUserModel } from "@/components/User/model";
+import { IUserModel } from '@/components/User/model';
 
 /**
  * @export

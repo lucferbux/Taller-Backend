@@ -1,5 +1,5 @@
-import { AboutMe } from "../model/aboutme";
-import { Project } from "../model/project";
+import { AboutMe } from '../model/aboutme';
+import { Project } from '../model/project';
 
 export interface ApiError {
   description?: string;

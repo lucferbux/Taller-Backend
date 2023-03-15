@@ -1,4 +1,4 @@
-import * as http from "http";
+import * as http from 'http';
 
 /**
  * @export
@@ -10,7 +10,7 @@ export class HttpError extends Error {
 
   message: string;
 
-  name: "HttpError";
+  name: 'HttpError';
 
   /**
    * Creates an instance of HttpError.
@@ -25,7 +25,7 @@ export class HttpError extends Error {
 
     this.status = status || 500;
     this.name = this.name;
-    this.message = message || http.STATUS_CODES[this.status] || "Error";
+    this.message = message || http.STATUS_CODES[this.status] || 'Error';
   }
 }
 

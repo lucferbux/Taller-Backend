@@ -1,6 +1,6 @@
-import * as alias from "module-alias";
+import * as alias from 'module-alias';
 alias.addAliases({
-  "@": __dirname,
+  '@': __dirname
 });
 
-import "@/config/server";
+import '@/config/server';

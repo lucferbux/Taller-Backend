@@ -1,7 +1,7 @@
-import UserService from "./service";
-import { HttpError } from "@/config/error";
-import { IUserModel } from "./model";
-import { NextFunction, Request, Response } from "express";
+import UserService from './service';
+import { HttpError } from '@/config/error';
+import { IUserModel } from './model';
+import { NextFunction, Request, Response } from 'express';
 
 /**
  * @export
@@ -10,11 +10,7 @@ import { NextFunction, Request, Response } from "express";
  * @param {NextFunction} next
  * @returns {Promise < void >}
  */
-export async function findAll(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
+export async function findAll(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const users: IUserModel[] = await UserService.findAll();
 
@@ -31,11 +27,7 @@ export async function findAll(
  * @param {NextFunction} next
  * @returns {Promise < void >}
  */
-export async function findOne(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
+export async function findOne(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const user: IUserModel = await UserService.findOne(req.params.id);
 
@@ -52,11 +44,7 @@ export async function findOne(
  * @param {NextFunction} next
  * @returns {Promise < void >}
  */
-export async function create(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
+export async function create(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const user: IUserModel = await UserService.insert(req.body);
 
@@ -73,11 +61,7 @@ export async function create(
  * @param {NextFunction} next
  * @returns {Promise < void >}
  */
-export async function remove(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
+export async function remove(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const user: IUserModel = await UserService.remove(req.params.id);
 

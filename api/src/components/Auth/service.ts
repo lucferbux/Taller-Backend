@@ -1,6 +1,6 @@
-import IUserModel from "@/components/User/model";
-import { IAuthService } from "./interface";
-import { MockLogin } from "./mock";
+import IUserModel from '@/components/User/model';
+import { IAuthService } from './interface';
+import { MockLogin } from './mock';
 
 /**
  * @export
@@ -33,12 +33,12 @@ const AuthService: IAuthService = {
       if (body.email === user.email && body.password === user.password) {
         return user;
       } else {
-        throw new Error("user invalid");
+        throw new Error('user invalid');
       }
     } catch (error) {
       throw new Error(error);
     }
-  },
+  }
 };
 
 export default AuthService;

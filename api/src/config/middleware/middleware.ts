@@ -1,13 +1,13 @@
-import * as HttpStatus from "http-status-codes";
-import * as bodyParser from "body-parser";
-import * as compression from "compression";
-import * as cookieParser from "cookie-parser";
-import * as cors from "cors";
-import * as express from "express";
-import * as helmet from "helmet";
-import { HttpError } from "@/config/error";
-import { sendHttpErrorModule } from "@/config/error/sendHttpError";
-import Logger from "@/utils/Logger";
+import * as HttpStatus from 'http-status-codes';
+import * as bodyParser from 'body-parser';
+import * as compression from 'compression';
+import * as cookieParser from 'cookie-parser';
+import * as cors from 'cors';
+import * as express from 'express';
+import * as helmet from 'helmet';
+import { HttpError } from '@/config/error';
+import { sendHttpErrorModule } from '@/config/error/sendHttpError';
+import Logger from '@/utils/Logger';
 
 /**
  * @export
@@ -17,7 +17,7 @@ export function configure(app: express.Application): void {
   // express middleware
   app.use(
     bodyParser.urlencoded({
-      extended: false,
+      extended: false
     })
   );
   app.use(bodyParser.json());
@@ -30,8 +30,8 @@ export function configure(app: express.Application): void {
   // providing a Connect/Express middleware that can be used to enable CORS with various options
   app.use(
     cors({
-      exposedHeaders: ["Authorization"],
-      optionsSuccessStatus: HttpStatus.OK,
+      exposedHeaders: ['Authorization'],
+      optionsSuccessStatus: HttpStatus.OK
     })
   );
 
@@ -49,14 +49,14 @@ interface CustomResponse extends express.Response {
  */
 export function initErrorHandler(app: express.Application): void {
   app.use((error: Error, req: express.Request, res: CustomResponse) => {
-    if (typeof error === "number") {
+    if (typeof error === 'number') {
       error = new HttpError(error); // next(404)
     }
 
     if (error instanceof HttpError) {
       res.sendHttpError(error);
     } else {
-      if (app.get("env") === "development") {
+      if (app.get('env') === 'development') {
         error = new HttpError(HttpStatus.INTERNAL_SERVER_ERROR, error.message);
         res.sendHttpError(error);
       } else {

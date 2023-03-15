@@ -1,6 +1,6 @@
-import jwt_decode from "jwt-decode";
-import { tokenKey } from "../constants/config";
-import { User } from "../model/user";
+import jwt_decode from 'jwt-decode';
+import { tokenKey } from '../constants/config';
+import { User } from '../model/user';
 
 interface Token {
   accessToken: string;
@@ -39,7 +39,7 @@ export function setAuthToken(accessToken: string) {
   const token: Token = {
     accessToken: accessToken,
     notBeforeTimestampInMillis: tokenPayload.iat * 1000,
-    expirationTimestampInMillis: tokenPayload.exp * 1000,
+    expirationTimestampInMillis: tokenPayload.exp * 1000
   };
   localStorage.setItem(tokenKey, JSON.stringify(token));
 }
@@ -72,7 +72,7 @@ function getAccessToken(): string {
   if (token) {
     return token.accessToken;
   }
-  return "";
+  return '';
 }
 
 export function getCurrentUser(): User | undefined {
@@ -86,7 +86,7 @@ export function getCurrentUser(): User | undefined {
     return {
       id: tokenPayload.id,
       active: true,
-      email: tokenPayload.email,
+      email: tokenPayload.email
     };
   } else {
     return undefined;

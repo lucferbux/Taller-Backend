@@ -1,12 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import * as express from "express";
-import * as http from "http";
-import * as jwtConfig from "@/config/middleware/jwtAuth";
-import * as swaggerUi from "swagger-ui-express";
-import AuthRouter from "./AuthRouter";
-import UserRouter from "./UserRouter";
-import AboutMeRouter from "./AboutMeRouter";
-import ProjectsRouter from "./ProjectsRouter";
+import * as express from 'express';
+import * as http from 'http';
+import * as jwtConfig from '@/config/middleware/jwtAuth';
+import * as swaggerUi from 'swagger-ui-express';
+import AuthRouter from './AuthRouter';
+import UserRouter from './UserRouter';
+import AboutMeRouter from './AboutMeRouter';
+import ProjectsRouter from './ProjectsRouter';
 
 type Request = express.Request;
 type Response = express.Response;
@@ -15,13 +15,13 @@ type Response = express.Response;
 let swaggerDoc: Object;
 
 try {
-  swaggerDoc = require("../../swagger.json");
+  swaggerDoc = require('../../swagger.json');
 } catch (error) {
-  console.log("***************************************************");
-  console.log("  Seems like you doesn`t have swagger.json file");
-  console.log("  Please, run: ");
-  console.log("  $ swagger-jsdoc -d swaggerDef.js -o swagger.json");
-  console.log("***************************************************");
+  console.log('***************************************************');
+  console.log('  Seems like you doesn`t have swagger.json file');
+  console.log('  Please, run: ');
+  console.log('  $ swagger-jsdoc -d swaggerDef.js -o swagger.json');
+  console.log('***************************************************');
 }
 
 /**
@@ -38,7 +38,7 @@ export function init(app: express.Application): void {
    *  Also, check if user authenticated
    * @constructs
    */
-  app.use("/v1/users", jwtConfig.isAuthenticated, UserRouter);
+  app.use('/v1/users', jwtConfig.isAuthenticated, UserRouter);
 
   /**
    * @description
@@ -46,7 +46,7 @@ export function init(app: express.Application): void {
    *  Also, check if user authenticated
    * @constructs
    */
-  app.use("/v1/aboutMe", AboutMeRouter);
+  app.use('/v1/aboutMe', AboutMeRouter);
 
   /**
    * @description
@@ -54,13 +54,13 @@ export function init(app: express.Application): void {
    *  Also, check if user authenticated
    * @constructs
    */
-  app.use("/v1/projects", ProjectsRouter);
+  app.use('/v1/projects', ProjectsRouter);
 
   /**
    * @description Forwards any requests to the /auth URI to our AuthRouter
    * @constructs
    */
-  app.use("/auth", AuthRouter);
+  app.use('/auth', AuthRouter);
 
   /**
    * @description
@@ -69,8 +69,8 @@ export function init(app: express.Application): void {
    * @constructs
    */
   if (swaggerDoc) {
-    app.use("/docs", swaggerUi.serve);
-    app.get("/docs", swaggerUi.setup(swaggerDoc));
+    app.use('/docs', swaggerUi.serve);
+    app.get('/docs', swaggerUi.setup(swaggerDoc));
   }
 
   /**

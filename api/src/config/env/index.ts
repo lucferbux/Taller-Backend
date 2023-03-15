@@ -1,4 +1,4 @@
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -7,21 +7,21 @@ interface IConfig {
   secret: string;
 }
 
-const NODE_ENV: string = process.env.NODE_ENV || "development";
+const NODE_ENV: string = process.env.NODE_ENV || 'development';
 
 const development: IConfig = {
   port: process.env.PORT || 3000,
-  secret: process.env.SECRET || "secret",
+  secret: process.env.SECRET || 'secret'
 };
 
 const production: IConfig = {
   port: process.env.PORT || 3000,
-  secret: process.env.SECRET || "secret",
+  secret: process.env.SECRET || 'secret'
 };
 
 const test: IConfig = {
   port: process.env.PORT || 3000,
-  secret: process.env.SECRET || "secret",
+  secret: process.env.SECRET || 'secret'
 };
 
 const config: {
@@ -29,7 +29,7 @@ const config: {
 } = {
   test,
   development,
-  production,
+  production
 };
 
 export default config[NODE_ENV];

@@ -1,6 +1,6 @@
-import IProjectsModel from "./model";
-import { IProjectsService } from "./interface";
-import { MockProjects } from "./mock";
+import IProjectsModel from './model';
+import { IProjectsService } from './interface';
+import { MockProjects } from './mock';
 
 /**
  * @export
@@ -60,7 +60,7 @@ const ProjectsService: IProjectsService = {
     } catch (error) {
       throw new Error(error.message);
     }
-  },
+  }
 };
 
 export default ProjectsService;
