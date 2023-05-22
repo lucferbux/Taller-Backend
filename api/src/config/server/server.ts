@@ -1,6 +1,5 @@
 import express from 'express';
 import * as Middleware from '@/config/middleware/middleware';
-import * as Routes from '@/routes';
 import config from '@/config/env/index';
 
 /**
@@ -12,11 +11,6 @@ const app: express.Application = express();
  * @constructs express.Application Middleware
  */
 Middleware.configure(app);
-
-/**
- * @constructs express.Application Routes
- */
-Routes.init(app);
 
 /**
  * @constructs express.Application Error Handler
