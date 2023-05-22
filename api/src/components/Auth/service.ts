@@ -14,6 +14,7 @@ const AuthService: IAuthService = {
    */
   async createUser(body: IUserModel): Promise<IUserModel> {
     try {
+      // TODO: user creation
       console.log(body);
       const user = MockLogin;
       return user;
@@ -29,6 +30,7 @@ const AuthService: IAuthService = {
   async getUser(body: IUserModel): Promise<IUserModel> {
     try {
       // TODO: check user and password
+      console.log(body);
       const user = MockLogin;
       if (body.email === user.email && body.password === user.password) {
         return user;

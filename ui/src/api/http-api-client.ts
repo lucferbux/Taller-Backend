@@ -59,14 +59,14 @@ const handleResponse = async <T>(func: () => Promise<T>): Promise<T> => {
 };
 
 // TODO: Uncomment to use it with auth
-// const getAuthorizationHeader = () => {
-//   const accessToken = getAccessToken();
-//   if (accessToken) {
-//     return 'Bearer ' + accessToken;
-//   } else {
-//     throw Object.assign(new Error('Unauthorized'), { code: 402 });
-//   }
-// };
+const getAuthorizationHeader = () => {
+  const accessToken = getAccessToken();
+  if (accessToken) {
+    return 'Bearer ' + accessToken;
+  } else {
+    throw Object.assign(new Error('Unauthorized'), { code: 402 });
+  }
+};
 
 export default class HttpApiClient implements ApiClient {
   baseUrl: string;
@@ -127,13 +127,19 @@ export default class HttpApiClient implements ApiClient {
     });
   };
 
-  /** TODO: Create post for Proyect creation with authentication
-     * Hint: Headers of the post should be
-     * headers: {
-          Authorization: getAuthorizationHeader(),
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-     * 
-     */
+  postProject = async (project: Project): Promise<ProjectResponse> => {
+    const response = await fetch(this.baseUrl + '/v1/projects', {
+      method: 'POST',
+      headers: {
+        Authorization: getAuthorizationHeader(),
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(project)
+    });
+    if (!response.ok) {
+      throw await createApiError(response);
+    }
+    return response.json();
+  };
 }

@@ -1,10 +1,13 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import createApiClient from '../../api/api-client-factory';
 import { Project } from '../../model/project';
 import { themes } from '../../styles/ColorStyles';
 import { Caption, H1 } from '../../styles/TextStyles';
+import { useCreate } from '../../hooks/useCreate';
 import Loader from '../elements/Loader';
+import { useNavigate } from 'react-router';
 
 const Admin = () => {
   const { t } = useTranslation();
@@ -16,7 +19,10 @@ const Admin = () => {
     version: ''
   };
 
+  const navigate = useNavigate();
+  const apiClient = useMemo(() => createApiClient(), []);
   // TODO: Implement a hook to create a project
+  const { create, status, error } = useCreate(apiClient.postProject);
 
   const [projectInput, setProjectInput] = useState<Partial<Project>>(emptyProjectInput);
 
@@ -28,6 +34,12 @@ const Admin = () => {
     projectInput.version !== '';
 
   // TODO: Implement a mechanism to navigate back on success
+  useEffect(() => {
+    if (status === 'success') {
+      navigate('/dashboard');
+    }
+    return () => {};
+  }, [status, navigate]);
 
   async function postProject(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -42,9 +54,8 @@ const Admin = () => {
       timestamp: projectInput?.timestamp || Date.now()
     };
 
-    console.log(newProject);
-    console.log(errorMessage);
     // TODO: Call the API to create a new project
+    create(newProject, errorMessage);
   }
 
   function onChange(e: ChangeEvent<HTMLInputElement>, attribute: keyof Project) {
@@ -61,8 +72,7 @@ const Admin = () => {
       <ContentWrapper>
         <TitleForm>{t('admin.header')}</TitleForm>
         <LoginPannel onSubmit={postProject} onReset={onReset}>
-          {/* TODO: Enable the error if there's an error in the request */}
-          {/* {error && <ErrorDescription>{error.message}</ErrorDescription>} */}
+          {error && <ErrorDescription>{error.message}</ErrorDescription>}
           <LoginForm
             name="title"
             type="text"
