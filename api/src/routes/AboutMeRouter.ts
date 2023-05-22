@@ -1,12 +1,13 @@
-import { Router } from 'express';
-import { AboutMeComponent } from '@/components';
+import { Router } from "express";
 
 /**
  * @constant {express.Router}
  */
 const router: Router = Router();
 
-router.get('/', AboutMeComponent.findAll);
+router.get('/', (req, res) => {
+    res.send('About Me')
+})
 
 /**
  * @export {express.Router}

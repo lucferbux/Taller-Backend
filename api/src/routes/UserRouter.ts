@@ -1,14 +1,14 @@
-import { Router } from 'express';
-import { UserComponent } from '@/components';
+import { Router } from "express";
 
 /**
  * @constant {express.Router}
  */
 const router: Router = Router();
 
-router.get('/', UserComponent.findAll);
+router.get('/', (req, res) => {
+    res.send('User')
+})
 
-router.get('/:id', UserComponent.findOne);
 
 /**
  * @export {express.Router}

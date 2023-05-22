@@ -1,12 +1,14 @@
-import { AuthComponent } from '@/components';
-import { Router } from 'express';
+import { Router } from "express";
 
 /**
  * @constant {express.Router}
  */
 const router: Router = Router();
 
-router.post('/login', AuthComponent.login);
+router.get('/login', (req, res) => {
+    res.send('Login')
+})
+
 
 /**
  * @export {express.Router}
