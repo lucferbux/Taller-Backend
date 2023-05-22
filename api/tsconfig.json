@@ -5,14 +5,13 @@
         "module": "commonjs",
         "noImplicitAny": true,
         "noUnusedLocals": true,
+        "esModuleInterop": true,
         "resolveJsonModule": true,
         "target": "es6",
         "sourceMap": true,
-        "plugins": [
-            {
-                "name": "tslint-language-service"
-            }
-        ],
+        "plugins": [{
+            "name": "tslint-language-service"
+        }],
         "paths": {
             "@/*": [
                 "src/*"

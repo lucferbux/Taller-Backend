@@ -1,4 +1,5 @@
 import { IUserModel } from '@/components/User/model';
+import { DocumentDefinition } from 'mongoose';
 
 /**
  * @export
@@ -10,7 +11,7 @@ export interface IAuthService {
    * @returns {Promise<IUserModel>}
    * @memberof AuthService
    */
-  createUser(IUserModel: IUserModel): Promise<IUserModel>;
+  createUser(IUserModel: DocumentDefinition<IUserModel>): Promise<IUserModel>;
   /**
    * @param {IUserModel} IUserModel
    * @returns {Promise<IUserModel>}

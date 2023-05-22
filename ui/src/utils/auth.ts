@@ -9,7 +9,7 @@ interface Token {
 }
 
 interface JWTPayload {
-  id: string;
+  _id: string;
   email: string;
   iat: number;
   exp: number;
@@ -84,7 +84,7 @@ export function getCurrentUser(): User | undefined {
     }
     const tokenPayload = getPayload(token.accessToken);
     return {
-      id: tokenPayload.id,
+      _id: tokenPayload._id,
       active: true,
       email: tokenPayload.email
     };

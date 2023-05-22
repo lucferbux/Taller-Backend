@@ -1,4 +1,4 @@
-import * as express from 'express';
+import express from 'express';
 import * as Middleware from '@/config/middleware/middleware';
 import * as Routes from '@/routes';
 import config from '@/config/env/index';

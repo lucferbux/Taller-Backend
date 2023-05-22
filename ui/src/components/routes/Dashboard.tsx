@@ -1,71 +1,60 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import useApp from '../../hooks/useApp';
-import { AboutMe } from '../../model/aboutme';
-import { Project } from '../../model/project';
 import AboutMeCard from '../cards/AboutMeCard';
 import ProjectCard from '../cards/ProjectCard';
 import { themes } from '../../styles/ColorStyles';
 import { MediumText } from '../../styles/TextStyles';
 import createApiClient from '../../api/api-client-factory';
-
-interface Response {
-  aboutme?: AboutMe;
-  projects?: Project[];
-}
+import Loader from '../elements/Loader';
+import useFetchData from '../../hooks/useFetchData';
 
 const Dashboard = () => {
   const { t } = useTranslation();
-  const [response, setResponse] = useState<Response | undefined>(undefined);
-  const [error, setError] = useState<string | undefined>(undefined);
-  const { addNotification, removeLastNotification } = useApp();
+  const apiClient = useMemo(() => createApiClient(), []);
+  const { data, isLoading, error } = useFetchData(apiClient.getDashboardInfo);
 
-  useEffect(() => {
-    async function retrieveInfo() {
-      const api = createApiClient();
-      try {
-        startSearch(t('loader.text'));
-        const projects: Project[] = await api.getProjects();
-        const aboutme: AboutMe = await api.getAboutMe();
-        setResponse({ aboutme, projects });
-      } catch (Error) {
-        setError('Info not found');
-      } finally {
-        stopSearch();
-      }
-    }
+  // TODO: 4) Llama al hook useProject
 
-    function startSearch(msg: string) {
-      setResponse(undefined);
-      setError(undefined);
-      addNotification(msg);
-    }
+  // TODO: 4) Crea la función deleteProject
+  // HINT: el primer argumento debería ser element: React.MouseEvent<HTMLElement> para así llara a element.preventDefault() y element.stopPropagation()
+  // HINT: Además de eliminar el proyecto, hay que refrescar la interfaz de React
 
-    function stopSearch() {
-      removeLastNotification();
-    }
+  if (isLoading) {
+    return <Loader message="Loading data" />;
+  }
 
-    retrieveInfo();
-  }, [setResponse, t, addNotification, removeLastNotification]);
+  if (error) {
+    return (
+      <Wrapper>
+        <ContentWrapper>
+          <ErrorMsg>{t('dashboard.error')}</ErrorMsg>
+        </ContentWrapper>
+      </Wrapper>
+    );
+  }
+
+  // TODO: 3) Create la función deleteProject
+  // HINT: first argument should be: React.MouseEvent<HTMLElement> to call element.preventDefault() and element.stopPropagation()
+  // HINT: On top of adding the document, we need to navigate to /admin
 
   return (
     <Wrapper>
       <ContentWrapper>
-        {response && (
+        {data && (
           <ResponseWrapper>
             <AboutMeWrapper>
-              {response?.aboutme && <AboutMeCard aboutMe={response?.aboutme} />}
+              {data?.aboutMe && <AboutMeCard aboutMe={data?.aboutMe} />}
             </AboutMeWrapper>
             <ProjectWrapper>
-              {response?.projects?.map((project, index) => (
-                <ProjectCard project={project} key={index} />
-              ))}
+              {data?.projects
+                ?.sort((a, b) => b.timestamp - a.timestamp)
+                .map((project, index) => (
+                  <ProjectCard project={project} key={index} />
+                ))}
             </ProjectWrapper>
           </ResponseWrapper>
         )}
-
-        {error && <ErrorMsg>{t('dashboard.error')}</ErrorMsg>}
       </ContentWrapper>
     </Wrapper>
   );

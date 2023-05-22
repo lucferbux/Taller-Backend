@@ -36,9 +36,16 @@ export interface ProjectResponse {
   message: string;
 }
 
+export interface DashboardInfo {
+  aboutMe: AboutMe;
+  projects: Project[];
+}
+
 export default interface ApiClient {
   token(email: string, password: string): Promise<TokenResponse>;
   getAboutMe(): Promise<AboutMe>;
   getProjects(): Promise<Project[]>;
+  getDashboardInfo(): Promise<DashboardInfo>;
   // TODO: Create POST for project
+  postProject(project: Project): Promise<ProjectResponse>;
 }

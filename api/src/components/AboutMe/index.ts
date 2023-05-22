@@ -29,7 +29,7 @@ export async function findAll(req: Request, res: Response, next: NextFunction): 
  */
 export async function findOne(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const aboutMe: IAboutMeModel = await AboutMeService.findOne(req.params.id);
+    const aboutMe: IAboutMeModel = await AboutMeService.findOne(req.params._id);
 
     res.status(200).json(aboutMe);
   } catch (error) {

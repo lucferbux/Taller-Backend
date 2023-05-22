@@ -1,157 +1,115 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import useApp from '../../hooks/useApp';
+import { Project } from '../../model/project';
 import { themes } from '../../styles/ColorStyles';
 import { Caption, H1 } from '../../styles/TextStyles';
+import Loader from '../elements/Loader';
 
 const Admin = () => {
   const { t } = useTranslation();
+  const emptyProjectInput: Partial<Project> = {
+    title: '',
+    description: '',
+    link: '',
+    tag: '',
+    version: ''
+  };
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [link, setLink] = useState('');
-  const [tags, setTags] = useState('');
-  const [version, setVersion] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
-  const [sucessMsg, setSuccessMsg] = useState('');
-  const { addNotification, removeLastNotification } = useApp();
+  // TODO: Implement a hook to create a project
+
+  const [projectInput, setProjectInput] = useState<Partial<Project>>(emptyProjectInput);
+
+  const readyToSubmit =
+    projectInput.title !== '' &&
+    projectInput.description !== '' &&
+    projectInput.link !== '' &&
+    projectInput.tag !== '' &&
+    projectInput.version !== '';
+
+  // TODO: Implement a mechanism to navigate back on success
 
   async function postProject(event: FormEvent<HTMLFormElement>) {
-    dismissError();
     event.preventDefault();
-    if (!readyToSubmit()) {
-      setErrorMsg(t('admin.err_invalid_form'));
-      return;
-    }
-    try {
-      console.log(title);
-      console.log(description);
-      console.log(tags);
-      console.log(version);
-      console.log(link);
-      // TODO: Create Proyect Object and post (HINT, there a generateUUID helper method)
-      addNotification('Posting...');
-      resetForm();
-      setSuccessMsg(t('admin.suc_network'));
-      setTimeout(() => {
-        setSuccessMsg('');
-      }, 2000);
-    } catch (e) {
-      setErrorMsg(t('admin.err_network'));
-    } finally {
-      removeLastNotification();
-    }
+    const errorMessage = !readyToSubmit ? t('admin.err_invalid_form') : undefined;
+    const newProject = {
+      ...projectInput,
+      title: projectInput?.title || '',
+      description: projectInput?.description || '',
+      tag: projectInput?.tag || '',
+      version: projectInput?.version || '',
+      link: projectInput?.link || '',
+      timestamp: projectInput?.timestamp || Date.now()
+    };
+
+    console.log(newProject);
+    console.log(errorMessage);
+    // TODO: Call the API to create a new project
   }
 
-  // TODO: Use it to generete uid
-  // function generateUUID(): string {
-  //   return Math.floor((1 + Math.random()) * 0x100000000000)
-  //   .toString(16)
-  //   .substring(1);
-  // }
-
-  function resetForm() {
-    setErrorMsg('');
-    setSuccessMsg('');
-    setTitle('');
-    setLink('');
-    setDescription('');
-    setTags('');
-    setVersion('');
+  function onChange(e: ChangeEvent<HTMLInputElement>, attribute: keyof Project) {
+    setProjectInput({ ...projectInput, [attribute]: e.target.value });
   }
 
-  function onChangeAnyInput() {
-    setErrorMsg('');
-  }
-
-  function onChangeTitle(e: ChangeEvent<HTMLInputElement>) {
-    setTitle(e.target.value);
-    onChangeAnyInput();
-  }
-
-  function onChangeDescription(e: ChangeEvent<HTMLInputElement>) {
-    setDescription(e.target.value);
-    onChangeAnyInput();
-  }
-
-  function onChangeLink(e: ChangeEvent<HTMLInputElement>) {
-    setLink(e.target.value);
-    onChangeAnyInput();
-  }
-
-  function onChangeTags(e: ChangeEvent<HTMLInputElement>) {
-    setTags(e.target.value);
-    onChangeAnyInput();
-  }
-
-  function onChangeVersion(e: ChangeEvent<HTMLInputElement>) {
-    setVersion(e.target.value);
-    onChangeAnyInput();
-  }
-
-  function readyToSubmit(): boolean {
-    return title !== '' && description !== '' && tags !== '' && version !== '';
-  }
-
-  function dismissError() {
-    setErrorMsg('');
+  function onReset() {
+    setProjectInput(emptyProjectInput);
   }
 
   return (
     <Wrapper>
+      {status === 'loading' && <Loader message={t('loader.text')} />}
       <ContentWrapper>
         <TitleForm>{t('admin.header')}</TitleForm>
-        <LoginPannel onSubmit={postProject} onReset={resetForm}>
-          {errorMsg && <ErrorDescription>{errorMsg}</ErrorDescription>}
-          {sucessMsg && <SuccessDescription>{sucessMsg}</SuccessDescription>}
+        <LoginPannel onSubmit={postProject} onReset={onReset}>
+          {/* TODO: Enable the error if there's an error in the request */}
+          {/* {error && <ErrorDescription>{error.message}</ErrorDescription>} */}
           <LoginForm
             name="title"
             type="text"
             placeholder={t('admin.input_title')}
-            value={title}
-            onChange={onChangeTitle}
+            value={projectInput.title}
+            onChange={(e) => onChange(e, 'title')}
           />
           <LoginForm
             name="description"
             type="text"
             placeholder={t('admin.input_description')}
-            value={description}
-            onChange={onChangeDescription}
+            value={projectInput.description}
+            onChange={(e) => onChange(e, 'description')}
           />
           <LoginForm
             name="link"
             type="text"
             placeholder={t('admin.input_link')}
-            value={link}
-            onChange={onChangeLink}
+            value={projectInput.link}
+            onChange={(e) => onChange(e, 'link')}
           />
           <LoginForm
             name="tags"
             type="text"
             placeholder={t('admin.input_tags')}
-            value={tags}
-            onChange={onChangeTags}
+            value={projectInput.tag}
+            onChange={(e) => onChange(e, 'tag')}
           />
           <LoginForm
             name="version"
             type="text"
             placeholder={t('admin.input_version')}
-            value={version}
-            onChange={onChangeVersion}
+            value={projectInput.version}
+            onChange={(e) => onChange(e, 'version')}
           />
           <ButtonWrapper>
             <ButtonCancel
+              disabled={status === 'loading'}
               type="reset"
               value={
                 t('admin.button_delete') != null ? (t('admin.button_delete') as string) : 'Delete'
               }
             />
             <ButtonForm
+              disabled={status === 'loading' || !readyToSubmit}
               type="submit"
-              value={
-                t('admin.button_accept') != null ? (t('admin.button_accept') as string) : 'Publish'
-              }
+              value={t('admin.button_accept')}
             />
           </ButtonWrapper>
         </LoginPannel>
@@ -222,14 +180,6 @@ const ErrorDescription = styled(Caption)`
   color: ${themes.light.warning};
 `;
 
-const SuccessDescription = styled(Caption)`
-  color: ${themes.light.primary};
-
-  @media (prefers-color-scheme: dark) {
-    color: ${themes.dark.primary};
-  }
-`;
-
 const LoginForm = styled.input`
   border: none;
   border-radius: 3px;
@@ -264,6 +214,7 @@ const ButtonForm = styled.input`
   border: none;
   background-color: ${themes.light.primary};
   color: ${themes.dark.text1};
+  opacity: ${(props) => (props.disabled ? '0.5' : '1')};
 
   @media (prefers-color-scheme: dark) {
     background-color: ${themes.dark.primary};

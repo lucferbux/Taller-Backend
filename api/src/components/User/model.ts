@@ -1,10 +1,10 @@
 export interface IUserRequest {
-  id: string;
+  _id: string;
   email: string;
 }
 
 export interface IUserModel {
-  id: string;
+  _id: string;
   email: string;
   password: string;
   passwordResetToken?: string;

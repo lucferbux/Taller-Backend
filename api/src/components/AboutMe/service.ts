@@ -30,9 +30,9 @@ const AboutMeService: IAboutMeService = {
    * @memberof AboutMeService
    */
   async findOne(id: string): Promise<IAboutMeModel> {
-    console.log(id);
     try {
       try {
+        console.log(id);
         const result = MockAboutMe;
         if (result.length > 0) {
           return result[0];

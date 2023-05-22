@@ -4,14 +4,16 @@ import ApiClient, {
   Forbidden,
   GenericError,
   NotFound,
+  DashboardInfo,
   PreconditionFailed,
   PreconditionRequired,
+  ProjectResponse,
   TokenResponse,
   Unauthorized,
   UnprocessableEntity
 } from './api-client';
 
-import { removeAuthToken } from '../utils/auth';
+import { getAccessToken, removeAuthToken } from '../utils/auth';
 import { Project } from '../model/project';
 import { AboutMe } from '../model/aboutme';
 
@@ -60,9 +62,9 @@ const handleResponse = async <T>(func: () => Promise<T>): Promise<T> => {
 // const getAuthorizationHeader = () => {
 //   const accessToken = getAccessToken();
 //   if (accessToken) {
-//     return "Bearer " + accessToken;
+//     return 'Bearer ' + accessToken;
 //   } else {
-//     throw new Unauthorized();
+//     throw Object.assign(new Error('Unauthorized'), { code: 402 });
 //   }
 // };
 
@@ -115,6 +117,15 @@ export default class HttpApiClient implements ApiClient {
       }
       return response.json();
     });
+
+  getDashboardInfo = (): Promise<DashboardInfo> => {
+    return Promise.all([this.getAboutMe(), this.getProjects()]).then(([aboutMe, projects]) => {
+      return {
+        aboutMe,
+        projects
+      };
+    });
+  };
 
   /** TODO: Create post for Proyect creation with authentication
      * Hint: Headers of the post should be

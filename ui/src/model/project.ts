@@ -9,7 +9,7 @@ export interface Project {
    * @type {string}
    * @memberof Project
    */
-  id: string;
+  _id?: string;
   /**
    *
    * @type {string}

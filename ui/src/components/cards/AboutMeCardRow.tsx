@@ -72,10 +72,10 @@ const LinkText = styled.a`
     line-height: 100%;
   }
 
-  color: ${themes.light.primary};
+  color: ${themes.dark.primary};
 
   @media (prefers-color-scheme: dark) {
-    color: ${themes.dark.primary};
+    color: ${themes.light.primary};
   }
 `;
 

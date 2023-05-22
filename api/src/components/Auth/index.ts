@@ -1,5 +1,5 @@
-import * as HttpStatus from 'http-status-codes';
-import * as jwt from 'jsonwebtoken';
+import HttpStatus from 'http-status-codes';
+import jwt from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
 import { IUserModel, IUserRequest } from '@/components/User/model';
 import HttpError from '@/config/error';
@@ -47,7 +47,7 @@ export async function login(req: Request, res: Response, next: NextFunction): Pr
     const userModel: IUserModel = await AuthService.getUser(req.body);
 
     const token: string = jwt.sign(
-      { id: userModel.id, email: userModel.email },
+      { id: userModel._id, email: userModel.email },
       app.get('secret'),
       {
         expiresIn: '60m'
@@ -81,7 +81,7 @@ export async function login(req: Request, res: Response, next: NextFunction): Pr
  */
 export async function user(req: RequestWithUser, res: Response, next: NextFunction): Promise<void> {
   try {
-    const userModel: IUserModel = await UserService.findOne(req.user.id);
+    const userModel: IUserModel = await UserService.findOne(req.user._id);
 
     res.status(HttpStatus.OK).send({ userModel });
   } catch (error) {

@@ -65,7 +65,7 @@ export const mockProjects = () =>
                 "title":"Vite",
                 "description":"Toolchain para la creación de proyectos basados en React, contiene lo báisco para crear proyectos basados en single-page apps",
                 "version":"4.0.3",
-                "link":"https://vitejs.dev/",
+                "link":"https://vitejs.dev",
                 "tag":"Toolchain, React, Bootstraping",
                 "timestamp":"765817712001"
                 },

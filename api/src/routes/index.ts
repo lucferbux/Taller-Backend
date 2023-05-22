@@ -31,7 +31,6 @@ try {
 export function init(app: express.Application): void {
   const router: express.Router = express.Router();
 
-  // TODO: Check this middelware to get to know how to add a midelware authentication
   /**
    * @description
    *  Forwards any requests to the /v1/users URI to our UserRouter
