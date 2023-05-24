@@ -47,5 +47,4 @@ export default interface ApiClient {
   getProjects(): Promise<Project[]>;
   getDashboardInfo(): Promise<DashboardInfo>;
   // TODO: Create POST for project
-  postProject(project: Project): Promise<ProjectResponse>;
 }
