@@ -100,5 +100,14 @@ export const MockProjects = [
     link: 'https://github.com/motdotla/dotenv#readme',
     tag: 'Javascript, Env Variable',
     timestamp: 765817712007
+  },
+  {
+    id: '567d5fs324',
+    title: 'Render',
+    description: 'Platafoma de computación en la nube',
+    version: '0.0.0',
+    link: 'https://dashboard.render.com/',
+    tag: 'CI/CD, Hosting, Cloud',
+    timestamp: 765817712010
   }
 ];
