@@ -14,12 +14,6 @@ const Dashboard = () => {
   const apiClient = useMemo(() => createApiClient(), []);
   const { data, isLoading, error } = useFetchData(apiClient.getDashboardInfo);
 
-  // TODO: 4) Llama al hook useProject
-
-  // TODO: 4) Crea la función deleteProject
-  // HINT: el primer argumento debería ser element: React.MouseEvent<HTMLElement> para así llara a element.preventDefault() y element.stopPropagation()
-  // HINT: Además de eliminar el proyecto, hay que refrescar la interfaz de React
-
   if (isLoading) {
     return <Loader message="Loading data" />;
   }
@@ -33,10 +27,6 @@ const Dashboard = () => {
       </Wrapper>
     );
   }
-
-  // TODO: 3) Create la función deleteProject
-  // HINT: first argument should be: React.MouseEvent<HTMLElement> to call element.preventDefault() and element.stopPropagation()
-  // HINT: On top of adding the document, we need to navigate to /admin
 
   return (
     <Wrapper>
